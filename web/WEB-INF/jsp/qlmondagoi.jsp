@@ -53,6 +53,7 @@
                                     <td>${msg.getMon_soLuong()}</td>
                                     <td>${msg.getMon_DonVi()}</td>
                                     <td><a href="<c:url value="XuLyHoanThanhMon.htm?ChiTiet_id=${msg.getChiTiet_id()}"/>"><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button></a></td>
+<!--                                    <td><a href="<c:url value="XuLyHoanThanhMon.htm?ChiTiet_id=${msg.getChiTiet_id()}"/>"><button type="button" class="btn btn-danger"></td>-->
                                 </tr>
                             </c:forEach>
                             <tr>
@@ -63,7 +64,8 @@
                                     <td>${msg.getMon_ten()}</td>
                                     <td>${msg.getMon_soLuong()}</td>
                                     <td>${msg.getMon_DonVi()}</td>
-                                    <td></td>
+                                    <td><a href="<c:url value="XuLyHuyMonHoanThanh.htm?ChiTiet_id=${msg.getChiTiet_id()}"/>"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-erase"></span></button></td>
+                                    <!-- Danger -->
                                 </tr>
                             </c:forEach>
                         </tbody>

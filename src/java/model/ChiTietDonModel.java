@@ -293,6 +293,29 @@ public class ChiTietDonModel {
         return true;
     }
     
+    public boolean udObjectBack(ChiTietDon d) {
+        try {
+            ConnectDB conn = new ConnectDB();
+            String sqlCommand = "update " + table + " set CTT_Trang_Thai = ? where ChiTiet_id = ? and CTT_Trang_Thai = '1'";
+            PreparedStatement pst = null;
+            try {
+                pst = conn.openConnect().prepareStatement(sqlCommand);
+                pst.setInt(1, 1);
+                pst.setInt(2, d.getChiTiet_id());
+                pst.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(ChiTietDonModel.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+            pst.close();
+            conn.closeConnection();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ChiTietDonModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
+    
     public boolean udObjectTT2(ChiTietDon d) {
         try {
             ConnectDB conn = new ConnectDB();

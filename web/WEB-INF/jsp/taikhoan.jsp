@@ -21,7 +21,8 @@
     <body style="background-image: url(<c:url value="/resource/images/bggoimon.png"/>)">        
         <div class="container-fluid" style="height: 74px; background-color: #504f4f">             
             <a class="navbar-brand" href="<c:url value="/TrangChu/tc.htm"/>"><img style="border-radius: 50% 50% 50% 50%; height: 60px;width: 60px;margin-top: -8px;margin-left: -20px" src="<c:url value="/resource/images/logo.png"/>" alt="" class="logo clearfix"></a>
-            <a style="float: right;padding-top: 25px" href="/BTLPORTAL/TaiKhoan/logout.htm">Log out <span class="glyphicon glyphicon-log-out"></span></a>
+           
+            <a style="float: right;padding-top: 25px" href="<%=request.getContextPath()%>/TaiKhoan/logout.htm">Log out <span class="glyphicon glyphicon-log-out"></span></a>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="margin-left: -15px">
             <nav class="navbar navbar-default sidebar" role="navigation">
