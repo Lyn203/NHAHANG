@@ -1,0 +1,70 @@
+.logo
+{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+.navbar
+{
+    background: rgba(22, 15, 9, 0.58);
+}
+
+.nav
+{
+    font-size: 15px;
+    font-weight: bold;
+    color: #000000;
+}
+.gioithieu-img
+{
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 15px;
+    margin-top: 50px;
+}
+.gioithieu-img2
+{
+    position: relative;
+    margin-left: 485px;
+    margin-top: 50px;
+    margin-right: auto;
+}
+.gioithieu-text
+{
+    text-align: center;
+    font-size: 17px;
+    color: #412718;
+    line-height: 20px;
+    margin-left: 70px;
+}
+.tenMon
+{
+    font-weight: bold;
+}
+#myInput {
+    background-image: url('/css/searchicon.png');
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+}
+
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+#myUL li a:hover:not(.header) {
+    background-color: #cfc;
+}
