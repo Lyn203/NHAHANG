@@ -172,6 +172,17 @@ public class MonAnController {
         }
     }
     
+    @RequestMapping(value = "/XuLyHuyMonHoanThanh")
+    public String XuLyHuyMonHoanThanh(@ModelAttribute("/hoanthanhchittiet") ChiTietDon ctd) {
+        
+        ChiTietDonModel chiTietDonModel = new ChiTietDonModel();
+        if (chiTietDonModel.udObjectReback(ctd)) {
+            return "redirect:QLMDG.htm";
+        } else {
+            return "redirect:QLMDG.htm";
+        }
+    }
+    
     @RequestMapping(value = "/KhaiVi")
     public ModelAndView showKhaiVi() {
         ModelAndView model = new ModelAndView("/thucdon");

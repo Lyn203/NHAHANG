@@ -42,7 +42,7 @@
                         <a href="<c:url value="/TrangChu/db.htm"/>" style="color: #ffffff">ĐẶT BÀN</a>
                     </li>
                     <li>
-                        <a href="<c:url value="/khachGoiMon"/>" style="color: #ffffff">ĐẶT MÓN</a>
+                        <a href="<c:url value="/khachGoiMon.htm"/>" style="color: #ffffff">ĐẶT MÓN</a>
                     </li>
                 </ul>
             </div>
