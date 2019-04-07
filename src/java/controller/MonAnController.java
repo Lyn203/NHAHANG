@@ -238,7 +238,16 @@ public class MonAnController {
         model.addObject("lstTD", ls);
         return model;
     }
-
+    // dang o day 2
+    @RequestMapping(value = "/QuanLyThucDon")
+    public ModelAndView showThucDon2() {
+        TaiKhoanModel tkmd= new TaiKhoanModel();
+        
+        ModelAndView model = new ModelAndView("/qlthucdon");
+        ArrayList<MonAn> ls = monAnModel.getAll();
+        model.addObject("lstTD", ls);
+        return model;
+    }
 
     @RequestMapping(value = "/ThemMon")
     public ModelAndView showThemmon(HttpSession session) {
@@ -264,6 +273,20 @@ public class MonAnController {
         } catch (SQLException ex) {
             Logger.getLogger(MonAnController.class.getName()).log(Level.SEVERE, null, ex);
             return "themmon";
+        }
+    }
+    // Dang o day
+    @RequestMapping(value = "/ThemMonAn")
+    public String xuLyThemMonAn(@ModelAttribute("/themmon") MonAn m) {
+        try {
+            if (monAnModel.insertObject(m)) {
+                return "redirect:QuanLyThucDon.htm";
+            } else {
+                return "ThemMonAn";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MonAnController.class.getName()).log(Level.SEVERE, null, ex);
+            return "ThemMonAn";
         }
     }
 

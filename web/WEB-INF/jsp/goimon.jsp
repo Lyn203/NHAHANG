@@ -30,7 +30,7 @@
                             <h2 style="text-align: center; color: #5f040d; font-weight: bold;">DANH SÁCH MÓN</h2>
                                                       <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Tìm kiếm theo tên món..." title="Type in a name">
                                                         <ul id="myUL">
-                            <c:forEach var="msg" items="${listMonAn}">
+                            <c:forEach var="msg" items="${lstMonAn}">
                                 <s:form action="XuLyThemMon.htm" commandName="chitietdon" method="get" modelAttribute="chitietdon">
                                     <!--                                        <li><a href="#">-->
                                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="margin-top: 38px;">

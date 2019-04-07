@@ -7,9 +7,14 @@ package controller;
 
 import entity.ChiTietDon;
 import entity.MonAn;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.ChiTietDonModel;
 import model.MonAnModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +27,13 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class DatMonController {
+    
+    private MonAnModel monAnModel;
+    
+    public DatMonController(){
+        monAnModel = new MonAnModel();
+    }
+    
     @RequestMapping(value = "/khachGoiMon",method = RequestMethod.GET)
     public ModelAndView khachGoiMon(){
 
@@ -29,7 +41,7 @@ public class DatMonController {
 
             MonAnModel monAnModel = new MonAnModel();
             ArrayList<MonAn> lstMonAn = monAnModel.getAll();
-            model.addObject("lstMonAn", lstMonAn);
+            model.addObject("listMonAn", lstMonAn);
             
 //            ArrayList<MonAn> lstMonAns = new ArrayList<>();
 //            MonAnModel monAnModel2 = new MonAnModel();
@@ -44,9 +56,9 @@ public class DatMonController {
     }
     
     @RequestMapping(value = "/XuLyThemMon", method = RequestMethod.GET)
-    public ModelAndView xuLyThemMon(@ModelAttribute("chitietdon") ChiTietDon ctd){
-        ModelAndView model = new ModelAndView("/goimon"); // Them trang goi mon
-
+    public ModelAndView xuLyThemMon(@ModelAttribute ChiTietDon ctd){
+        ModelAndView model = new ModelAndView("khachgoimon"); // Them trang goi mon
+        
         ChiTietDonModel chiTietDonModel = new ChiTietDonModel();
         
         if (chiTietDonModel.insertObject(ctd)) {
@@ -70,5 +82,20 @@ public class DatMonController {
             return model;
         }
     }
+    
+    @RequestMapping(value = "/ThemMonAn")
+    public String xuLyThemMonAn(@ModelAttribute("/themmon") MonAn m) {
+        try {
+            if (monAnModel.insertObject(m)) {
+                return "redirect:QuanLyThucDon.htm";
+            } else {
+                return "themmon";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MonAnController.class.getName()).log(Level.SEVERE, null, ex);
+            return "themmon";
+        }
+    }
+    
 }
     

@@ -26,7 +26,7 @@ public class ConnectDB {
 
     private static final String cs = "jdbc:mysql://localhost:3306/nhahang?characterEncoding=UTF-8&autoReconnect=true&useSSL=false";
     private static final String user = "root";
-    private static final String password ="0000";
+    private static final String password ="231996";
 
     //private String table = "monan";
 

@@ -29,36 +29,33 @@
                             <h2 style="text-align: center; color: #5f040d; font-weight: bold;">DANH SÁCH MÓN</h2>
                                                       <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Tìm kiếm theo tên món..." title="Type in a name">
                                                         <ul id="myUL">
-                            <form action="XuLyThemMon.htm" method="get">
+                            
                                 
                             <%
                                 String absolutePath = request.getContextPath();
-                                ArrayList<MonAn> lstMonAn = (ArrayList<MonAn>)request.getAttribute("lstMonAn");
-                                for (MonAn monAn : lstMonAn) {
+                                //ArrayList<MonAn> lstMonAn = (ArrayList<MonAn>)request.getAttribute("lstMonAn");
                                 %>
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="margin-top: 38px;">
-                                    <img src="<%=absolutePath%>/resource/images/<%=monAn.getMon_hinhAnh()%>" style="border-radius: 20px;"/> ><br><br>
-                                        <input value="<%=monAn.getMon_ten()%>" style="width: 100%; border: none; font-weight: bold;" readonly="true"></input>
-                                        <input value="<%=monAn.getMon_gia()%>" style="width: 80px; border: none;" readonly="true"></input>VND/Đĩa<br>
-                                        <input value="<%=monAn.getMon_giaN()%>" style="width: 80px; border: none;" readonly="true"></input>VND/Người<br>
-                                        <input ptype="number" min="1" style="width: 60px" class="form-control" ></input>
-                                        <select class="form-control" style="width: 100px;">
-                                            <option value="Đĩa">Đĩa</option>
-                                            <option value="Người">Người</option>
-                                        </select>  
-                                        <input type="submit" value="Đặt món" class="btn btn-info"/>
-                                </div>
-                                <%
-                                }
-                            %>
                                 
-                            </form>  
+                                <c:forEach var="msg" items="${listMonAn}">
+                                    <s:form action="XuLyThemMon.htm" commandName="chitietdon" method="get" modelAttribute="chitietdon">
+                                    <!--                                        <li><a href="#">-->
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="margin-top: 38px;">
+                                        <img src="<c:url value="/resource/images/${msg.getMon_hinhAnh()}"/>" style="border-radius: 20px;"><br><br>
+                                        
+                                            <input type="submit" value="Đặt món" class="btn btn-info"/>
+                                        </div>
+                                        <!--                                            </a></li>-->
+                                    </s:form>
+                                </c:forEach>
+                                
+                                
+                                
+                            
                             <!--</ul>-->
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <!--<a  href="<c:url value="XyLyDatMon.htm?Don_id=${sessionScope.SIdHD}"/>"><button type="button" class="btn btn-danger" style="float: right; margin-top: 50px;">Xác nhận đặt món</button></a>-->
                     <a  href="<c:url value="/Don/DsBan.htm"/>"><button type="button" class="btn btn-success" style="float: right; margin-top: 50px;">Xác nhận đặt món</button></a>
 
                     <table class="table table-bordered" style="border: 4px solid #ddd; margin-top: 100px;">
@@ -75,7 +72,6 @@
                                 <td style="font-weight: bold;">Thành tiền</td>
                                 <td></td>
                             </tr>
-
                             
                         </tbody>
                     </table>
