@@ -176,7 +176,7 @@ public class MonAnController {
     public String XuLyHuyMonHoanThanh(@ModelAttribute("/hoanthanhchittiet") ChiTietDon ctd) {
         
         ChiTietDonModel chiTietDonModel = new ChiTietDonModel();
-        if (chiTietDonModel.udObjectBack(ctd)) {
+        if (chiTietDonModel.udObjectReback(ctd)) {
             return "redirect:QLMDG.htm";
         } else {
             return "redirect:QLMDG.htm";
