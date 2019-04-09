@@ -125,17 +125,61 @@ public class BanGoiModel {
         conn.closeConnection();
         return true;
     }
-
+    
+    public List<Integer> getBanChuaDat(){
+        ConnectDB conn = new ConnectDB();
+        ResultSet rs = null;
+        String sqlCommand = "select distinct Ban_id from dongoi order by Ban_id asc";
+        Statement st = null;
+        ArrayList<Integer> lstBanDaGoi = new ArrayList<>();
+        try {
+            st = conn.openConnect().createStatement();
+            rs = st.executeQuery(sqlCommand);
+            while (rs.next()) {
+                lstBanDaGoi.add(rs.getInt("Ban_id"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BanGoiModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            st.close();
+            conn.closeConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(BanGoiModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        List<Integer> listBanChuaGoi = new ArrayList<>();
+        for(int i =  0; i < lstBanDaGoi.size(); i++){
+            if(i+1 > lstBanDaGoi.size() - 1)
+                break;
+            Integer between = Math.abs(lstBanDaGoi.get(i) - lstBanDaGoi.get(i+1));
+            if(between == 1) continue;
+            else{
+                while(between > 1){
+                    between--;
+                    listBanChuaGoi.add(lstBanDaGoi.get(i)+between);
+                }
+            }
+        }
+        
+        return listBanChuaGoi;
+    }
+    
     
     public static void main(String[] args) throws SQLException {
         
         BanGoiModel bgm = new BanGoiModel();
         
         System.out.println("Thong tin tat ca cac ban");
-        ArrayList<BanGoi> lstTest = bgm.getAllObject();
-        for (BanGoi banGoi : lstTest) {
-            System.out.println(banGoi.toString());
-        }
+//        ArrayList<BanGoi> lstTest = bgm.getAllObject();
+//        for (BanGoi banGoi : lstTest) {
+//            System.out.println(banGoi.toString());
+//        }
+         List<Integer> listBanChuaGoi = bgm.getBanChuaDat();
+         for(Integer inte : listBanChuaGoi){
+             System.out.println(inte);
+         }
+        
 //        System.out.println("Thong tin ban co id 1");
 //        BanGoi bg = bgm.getObject(1);
 //        System.out.println(bg.toString());

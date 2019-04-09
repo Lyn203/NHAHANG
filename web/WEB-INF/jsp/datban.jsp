@@ -4,10 +4,12 @@
     Author     : NSH
 --%>
 
+<%@page import="model.BanGoiModel"%>
+<%@page import="java.util.List"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="http://www.springframework.org/tags/form" %>
-
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -50,27 +52,35 @@
                 <table class="table table-hover" style="width: 30%; margin-left: 475px; text-align: center;">
                     <h2 style="text-align: center; color: #ffffff; line-height: 80px;">ĐẶT BÀN</h2>
                     <tbody>
-                        <tr>
-                            <td><input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="" placeholder="HỌ VÀ TÊN"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="" placeholder="SỐ ĐIỆN THOẠI"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="" placeholder="EMAIL"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="" placeholder="SỐ NGƯỜI"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="" placeholder="THỜI GIAN"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="" placeholder="NGÀY"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="" rowspan="" headers=""><button type="button" class="btn btn-default">ĐẶT BÀN</button></td>
-                        </tr>
+                        <s:form action="../DatBan.htm" method="get" modelAttribute="thongtinban">
+                            <tr>
+                                <td><s:input path="TT_ten_KH" class="form-control" required="required" placeholder="HỌ VÀ TÊN" /></td>
+                            </tr>
+                            <tr>
+                                <td><s:input path="TT_sdt" type="text" class="form-control" required="required" placeholder="SỐ ĐIỆN THOẠI"/></td>
+                            </tr>
+                            <tr>
+                                <td><s:input path="TT_email" type="text" class="form-control" required="required" placeholder="EMAIL" /></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <% 
+                                        BanGoiModel bgm = new BanGoiModel();
+                                        List<Integer> listChuaGoi = bgm.getBanChuaDat();
+                                    %>
+                                        <s:select path="Ban_id" class="form-control">
+                                            <option value="0" selected="selected">Chọn bàn đang trống</option>
+                                            <%for(Integer inte : listChuaGoi){%>
+                                            <s:option value="<%=inte%>">Bàn <%=inte%></s:option>
+                                            <%}%>
+                                        </s:select>
+                                            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="" rowspan="" headers=""><button type="submit" class="btn btn-default">ĐẶT BÀN</button></td>
+                            </tr>
+                        </s:form>
                     </tbody>
                 </table>
             </div>

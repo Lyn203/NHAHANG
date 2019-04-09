@@ -7,6 +7,7 @@ package entity;
 
 import java.util.ArrayList;
 import model.ChiTietDonModel;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
  *
@@ -22,6 +23,7 @@ public class ChiTietDon {
     private int CTT_Trang_Thai;
     private String Mon_DonVi;
 
+    
     public ChiTietDon() {
     }
 
@@ -95,5 +97,6 @@ public class ChiTietDon {
     public String toString() {
         return "ChiTietDon{" + "Don_id=" + Don_id + ", ChiTiet_id=" + ChiTiet_id + ", Mon_ten=" + Mon_ten + ", Mon_gia=" + Mon_gia + ", Mon_soLuong=" + Mon_soLuong + ", CTT_Trang_Thai=" + CTT_Trang_Thai + ", Mon_DonVi=" + Mon_DonVi + '}';
     }
-
+    
+    
 }

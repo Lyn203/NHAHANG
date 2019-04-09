@@ -34,6 +34,7 @@
                             <%
                                 String absolutePath = request.getContextPath();
                                 //ArrayList<MonAn> lstMonAn = (ArrayList<MonAn>)request.getAttribute("lstMonAn");
+                                try{
                                 %>
                                 
                                 <c:forEach var="msg" items="${listMonAn}">
@@ -41,15 +42,26 @@
                                     <!--                                        <li><a href="#">-->
                                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="margin-top: 38px;">
                                         <img src="<c:url value="/resource/images/${msg.getMon_hinhAnh()}"/>" style="border-radius: 20px;"><br><br>
-                                        
+                                            <s:input path="Mon_ten" value="${msg.getMon_ten()}" style="width: 100%; border: none; font-weight: bold;" readonly="true"></s:input>
+                                        <s:input path="Mon_gia" value="${msg.getMon_gia()}" style="width: 80px; border: none;" readonly="true"></s:input>VND/Đĩa<br>
+                                        <s:input path="Mon_gia" value="${msg.getMon_giaN()}" style="width: 80px; border: none;" readonly="true"></s:input>VND/Người<br>
+                                        <s:input path="Mon_soLuong" type="number" min="1" style="width: 60px" class="form-control" ></s:input>
+                                        <s:select path="Mon_DonVi" class="form-control" style="width: 100px;">
+                                            <s:option value="Đĩa">Đĩa</s:option>
+                                            <s:option value="Người">Người</s:option>
+                                        </s:select>   
+                                        <s:input type="hidden" path="Don_id" value="${sessionScope.SIdDon}"></s:input>
                                             <input type="submit" value="Đặt món" class="btn btn-info"/>
                                         </div>
                                         <!--                                            </a></li>-->
                                     </s:form>
                                 </c:forEach>
                                 
-                                
-                                
+                             <%
+                                }catch(Exception e){
+                                    e.printStackTrace();
+                                }
+                             %>    
                             
                             <!--</ul>-->
                         </div>
@@ -72,7 +84,31 @@
                                 <td style="font-weight: bold;">Thành tiền</td>
                                 <td></td>
                             </tr>
-                            
+                        <%                               
+                                ArrayList<ChiTietDon> lstCT = (ArrayList<ChiTietDon>) request.getAttribute("lstChiTiet");
+                                ArrayList<MonAn> lstM = (ArrayList<MonAn>) request.getAttribute("lstMonAn");
+                                int tongTien = 0;
+                                for (int i = 0; i < lstCT.size(); i++) {
+                                    out.print("<tr>");
+                                    out.print("<td>" + lstCT.get(i).getMon_ten() + "</td>");
+                                    out.print("<td style=\"text-align: right;\" >" + lstCT.get(i).getMon_soLuong() + "</td>");
+                                    out.print("<td>" + lstCT.get(i).getMon_DonVi() + "</td>");
+                                    if (lstCT.get(i).getMon_DonVi().equals("Đĩa")) {
+                                        out.print("<td style=\"text-align: right;\" >" + lstCT.get(i).getMon_soLuong() * lstM.get(i).getMon_gia() + "</td>");
+                                        tongTien += lstCT.get(i).getMon_soLuong() * lstM.get(i).getMon_gia();
+                                    } else {
+                                        out.print("<td style=\"text-align: right;\" >" + lstCT.get(i).getMon_soLuong() * lstM.get(i).getMon_giaN() + "</td>");
+                                        tongTien += lstCT.get(i).getMon_soLuong() * lstM.get(i).getMon_giaN();
+                                    }
+                                    out.print("<td><a href=\"XuLyXoaChiTietMon2.htm?ChiTiet_id="+lstCT.get(i).getChiTiet_id()+"\"/><button type=\"button\" class=\"btn btn-danger\">Xóa</button></a>"
+                                            + "</td>");
+                                    out.print("</tr>");
+                                }
+                                out.print("<tr>");
+                                out.print("<td colspan=\"3\" style=\"font-weight: bold; text-align: right; padding-right: 5px; color: #5f040d; border: none;\">TỔNG TIỀN</td>");
+                                out.print("<td colspan=\"3\" style=\"text-align: right; color: #5f040d; font-weight: bold; \" >" + tongTien + "</td>");
+                                out.print("</tr>");
+                            %>    
                         </tbody>
                     </table>
                 </div>
