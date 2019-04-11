@@ -81,6 +81,7 @@ public class DonGoiModel {
         return donGoi;
     }
     
+    
     //Lay ra don dang goi o ban do
     public DonGoi getIDDon(int Banid) {
         ConnectDB conn = new ConnectDB();
@@ -135,7 +136,7 @@ public class DonGoiModel {
 
     public boolean insertObject(DonGoi dg) {
         ConnectDB conn = new ConnectDB();
-        String sqlCommand = "insert into " + table + " (Ban_id, Ban_gioGoi, Ban_ngayGoi, Don_thanhTien) value(?,?,?,?)";
+        String sqlCommand = "insert into " + table + " (Ban_id, Ban_gioGoi, Ban_ngayGoi, Trang_thai_don, Don_thanhTien) values(?,?,?,?,?)";
         PreparedStatement pst = null;
 
         Calendar cl = Calendar.getInstance();
@@ -148,7 +149,8 @@ public class DonGoiModel {
             pst.setString(2, df.format(cl.getTime()));
             pst.setString(3, df2.format(cl.getTime()));
             pst.setInt(4, 0);
-            pst.executeUpdate();
+            pst.setInt(5, 0);
+            pst.execute();
         } catch (SQLException ex) {
             Logger.getLogger(DonGoiModel.class.getName()).log(Level.SEVERE, null, ex);
             return false;
@@ -161,6 +163,36 @@ public class DonGoiModel {
         }
 
         return true;
+    }
+    
+    public ResultSet insertObjectVer2(DonGoi dg) {
+        ConnectDB conn = new ConnectDB();
+        String sqlCommand = "insert into " + table + " (Ban_id, Ban_gioGoi, Ban_ngayGoi, Don_thanhTien) value(?,?,?,?)";
+        PreparedStatement pst = null;
+
+        Calendar cl = Calendar.getInstance();
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat df2 = new SimpleDateFormat("HH:mm");
+        ResultSet rs = null;
+        try {
+            pst = conn.openConnect().prepareStatement(sqlCommand);
+            pst.setInt(1, dg.getBan_id());
+            pst.setString(2, df.format(cl.getTime()));
+            pst.setString(3, df2.format(cl.getTime()));
+            pst.setInt(4, 0);
+            rs = pst.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(DonGoiModel.class.getName()).log(Level.SEVERE, null, ex);
+            return rs;
+        }
+        try {
+            pst.close();
+            conn.closeConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(DonGoiModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return rs;
     }
 
     public boolean updateObject(DonGoi dg) throws SQLException {
@@ -192,6 +224,29 @@ public class DonGoiModel {
         return true;
     }
     
+    //select max(Don_id) as MaxId from dongoi
+    public int getMaxDon_id(){
+        ConnectDB conn = new ConnectDB();
+        ResultSet rs = null;
+        String sqlCommand = "select max(Don_id) as maxdonid from dongoi";
+        Statement pst = null;
+         
+        try {
+            pst = conn.openConnect().createStatement();
+            rs = pst.executeQuery(sqlCommand);
+            rs.next();
+            return rs.getInt("maxdonid");
+        } catch (SQLException ex) {
+            Logger.getLogger(DonGoiModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            pst.close();
+            conn.closeConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(DonGoiModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
 
     public ArrayList<DonGoi> getCTDDangGoi(int Banid) {
         ConnectDB conn = new ConnectDB();
@@ -231,14 +286,18 @@ public class DonGoiModel {
             return getCTDDangGoi(Banid).get(0);
         }
     }
-
+    
+    
+    
     public static void main(String[] args) throws SQLException {
 
         DonGoiModel dgm = new DonGoiModel();
-
-        DonGoi dg = dgm.getIDBan(129);
-        System.out.println(dg.toString());
-        System.out.println(dg.getBan_id());
+        DonGoi dg = new DonGoi();
+        dg.setBan_id(6);
+        dg.setTrang_thai_don(0);
+        dg.setDon_thanhTien(0);
+        dgm.insertObject(dg);
+       
 
 //        System.out.println(dgm.getCTDDangGoi(1).toString());
 //        System.out.println("Thong tin tat ca cac ban");

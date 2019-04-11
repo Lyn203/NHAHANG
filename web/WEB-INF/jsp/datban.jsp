@@ -52,11 +52,11 @@
                 <table class="table table-hover" style="width: 30%; margin-left: 475px; text-align: center;">
                     <h2 style="text-align: center; color: #ffffff; line-height: 80px;">ĐẶT BÀN</h2>
                     <tbody>
-                        <s:form action="../DatBan.htm" method="get" modelAttribute="thongtinban">
+                        <s:form action="../DatBan.htm" method="get" commandName="thongtinban" modelAttribute="thongtinban">
                             <tr>
                                 <td><s:input path="TT_ten_KH" class="form-control" required="required" placeholder="HỌ VÀ TÊN" /></td>
                             </tr>
-                            <tr>
+                            <tr>s
                                 <td><s:input path="TT_sdt" type="text" class="form-control" required="required" placeholder="SỐ ĐIỆN THOẠI"/></td>
                             </tr>
                             <tr>
@@ -69,7 +69,7 @@
                                         List<Integer> listChuaGoi = bgm.getBanChuaDat();
                                     %>
                                         <s:select path="Ban_id" class="form-control">
-                                            <option value="0" selected="selected">Chọn bàn đang trống</option>
+                                            <option selected="selected">Chọn bàn đang trống</option>
                                             <%for(Integer inte : listChuaGoi){%>
                                             <s:option value="<%=inte%>">Bàn <%=inte%></s:option>
                                             <%}%>

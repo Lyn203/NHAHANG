@@ -42,7 +42,7 @@
                                     <!--                                        <li><a href="#">-->
                                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="margin-top: 38px;">
                                         <img src="<c:url value="/resource/images/${msg.getMon_hinhAnh()}"/>" style="border-radius: 20px;"><br><br>
-                                            <s:input path="Mon_ten" value="${msg.getMon_ten()}" style="width: 100%; border: none; font-weight: bold;" readonly="true"></s:input>
+                                        <s:input path="Mon_ten" value="${msg.getMon_ten()}" style="width: 100%; border: none; font-weight: bold;" readonly="true"></s:input>
                                         <s:input path="Mon_gia" value="${msg.getMon_gia()}" style="width: 80px; border: none;" readonly="true"></s:input>VND/Đĩa<br>
                                         <s:input path="Mon_gia" value="${msg.getMon_giaN()}" style="width: 80px; border: none;" readonly="true"></s:input>VND/Người<br>
                                         <s:input path="Mon_soLuong" type="number" min="1" style="width: 60px" class="form-control" ></s:input>
@@ -50,10 +50,10 @@
                                             <s:option value="Đĩa">Đĩa</s:option>
                                             <s:option value="Người">Người</s:option>
                                         </s:select>   
-                                        <s:input type="hidden" path="Don_id" value="${sessionScope.SIdDon}"></s:input>
+                                        <s:input path="Don_id" value="${IdDon}"></s:input>
                                             <input type="submit" value="Đặt món" class="btn btn-info"/>
                                         </div>
-                                        <!--                                            </a></li>-->
+
                                     </s:form>
                                 </c:forEach>
                                 
@@ -63,12 +63,12 @@
                                 }
                              %>    
                             
-                            <!--</ul>-->
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <a  href="<c:url value="/Don/DsBan.htm"/>"><button type="button" class="btn btn-success" style="float: right; margin-top: 50px;">Xác nhận đặt món</button></a>
+                    <!-- XacNhanDatMon redirect -> /Don/DsBan.htm-->
+                    <a  href="<c:url value="/XacNhanDatMon.htm"/>"><button type="button" class="btn btn-success" style="float: right; margin-top: 50px;">Xác nhận đặt món</button></a>
 
                     <table class="table table-bordered" style="border: 4px solid #ddd; margin-top: 100px;">
                         <thead>

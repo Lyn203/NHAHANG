@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 /**
  *
  * @author thisi
@@ -37,9 +38,10 @@ public class TrangChuController {
     }
     
     @RequestMapping(value = "/db")
-    public ModelAndView showDatBan() {
+    public ModelAndView showDatBan(RedirectAttributes redirect) {
 //        BanGoiModel banGoiModel = new BanGoiModel();
         ModelAndView model = new ModelAndView("/datban");
+//        redirect.addFlashAttribute("thongtinban");
 //        List<Integer> listBanChuaDat = banGoiModel.getBanChuaDat();
 //        model.addObject("listBanChuaDat", listBanChuaDat);
 //        logger.info(listBanChuaDat.toString());
@@ -50,4 +52,5 @@ public class TrangChuController {
     public ThongTinBan getThongTinBan(){
         return new ThongTinBan();
     }
+    
 }
